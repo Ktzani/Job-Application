@@ -17,12 +17,19 @@ Route::get("/teste", function(){
     return ['ola'];
 })->name("index");
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Public routes
+Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api\V1"], function(){
+    Route::post('/register', 'AuthController@register');
+    Route::post('/login', 'AuthController@login');
 });
 
-Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api\V1"], function(){
+// Private routes
+Route::group(['middleware' => ['auth:sanctum'],"prefix" => "v1", "namespace" => "App\Http\Controllers\Api\V1"], function(){
     Route::apiResource("usuarios", UsuarioController::class);
     Route::apiResource('lojas', LojaController::class);
+    Route::post('/logout', 'AuthController@logout');
+});
+
+Route::middleware('auth:sanctum')->get('/usuario', function (Request $request) {
+    return $request->user();
 });

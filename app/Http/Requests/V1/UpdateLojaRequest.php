@@ -31,7 +31,6 @@ class UpdateLojaRequest extends FormRequest
                 'cidade' => ['required','string','max:255'],
                 'uf' => ['required','string','max:255'],
                 'cep' => ['required','integer','digits:8'],
-                'usuarioId' => ['required','exists:usuarios,id'],
             ];
         }
 
@@ -46,7 +45,6 @@ class UpdateLojaRequest extends FormRequest
                 'cidade' => ['sometimes','required','string','max:255'],
                 'uf' => ['sometimes','required','string','max:255'],
                 'cep' => ['sometimes','required','integer','digits:8'],
-                'usuarioId' => ['required','exists:usuarios,id'],
             ];
         }
     }

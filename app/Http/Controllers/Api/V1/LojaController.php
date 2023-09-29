@@ -18,15 +18,20 @@ use App\Filters\V1\LojasFilter;
 class LojaController extends Controller
 {
     public function index(Request $request)
-    {
+    {   
         $filtro = new LojasFilter();
         $filterItems = $filtro->transform($request); //[['coluna', 'operador', 'valor']]
 
+        $perPage = $request->input('per_page', 20);
+        $usuario = auth()->user();
+
         if(count($filterItems) == 0){
-            $lojas = new LojaCollection(Loja::paginate(20));
+            $lojas = new LojaCollection(Loja::where('usuario_id', $usuario->id)->paginate($perPage));
         }
         else{
-            $lojasFiltered = Loja::where($filterItems)->paginate(20);
+            $lojasFiltered = Loja::where('usuario_id', $usuario->id)
+                ->where($filterItems)
+                ->paginate($perPage);
             $lojas = new LojaCollection($lojasFiltered->appends($request->query()));
         }
         
@@ -35,7 +40,9 @@ class LojaController extends Controller
 
     public function store(StoreLojaRequest $request)
     {
-        return response()->json(new LojaResource(Loja::create([
+        $usuario = auth()->user();
+
+        $loja = Loja::create([
             'nome' => $request->input('nome'),
             'url' => $request->input('url'),
             'logo_url' => $request->input('logo_url'),
@@ -45,8 +52,12 @@ class LojaController extends Controller
             'cidade' => $request->input('cidade'),
             'uf' => $request->input('uf'),
             'cep' => $request->input('cep'),
-            'usuario_id' => $request->input('usuario_id'),
-        ])), 201);
+            'usuario_id' => $usuario->id
+        ]);
+
+        return response()->json([
+            'loja' => new LojaResource($loja)
+        ], 201);
     }
 
     public function show(Loja $loja)
@@ -56,6 +67,7 @@ class LojaController extends Controller
 
     public function update(UpdateLojaRequest $request, Loja $loja)
     {
+        $usuario = auth()->user();
         return response()->json($loja->update([
             'nome' => $request->has('nome') ? $request->input('nome') : $loja->nome,
             'url' => $request->has('url') ? $request->input('url') : $loja->url,
@@ -66,7 +78,7 @@ class LojaController extends Controller
             'cidade' => $request->has('cidade') ? $request->input('cidade') : $loja->cidade,
             'uf' => $request->has('uf') ? $request->input('uf') : $loja->uf,
             'cep' => $request->has('cep') ? $request->input('cep') : $loja->cep,
-            'usuario_id' => $request->input('usuario_id'),
+            'usuario_id' => $usuario->id
         ]));
     }
 

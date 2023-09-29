@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\V1\StoreUsuarioRequest;
 use App\Http\Requests\V1\UpdateUsuarioRequest;
 use App\Http\Resources\V1\UsuarioResource;
 use App\Http\Resources\V1\UsuarioCollection;
@@ -21,26 +20,17 @@ class UsuarioController extends Controller
     {   
         $filter = new UsuariosFilter();
         $filterItems = $filter->transform($request); //[['coluna', 'operador', 'valor']]
-
-        $includeLojas = $request->query("includeLojas");
-
+        
         $usuarios = Usuario::where($filterItems);
+
+        $perPage = $request->input('per_page', 20);
+        $includeLojas = $request->query("includeLojas");
         
         if($includeLojas){
             $usuarios = $usuarios->with('lojas');
         }
         
-        return response()->json(new UsuarioCollection($usuarios->paginate(20)->appends($request->query())));
-    }
-
-    public function store(StoreUsuarioRequest $request)
-    { 
-        return response()->json(new UsuarioResource(Usuario::create([
-            'nome' => $request->input('nome'),
-            'email' => $request->input('email'),
-            'senha' => bcrypt($request->input('senha')),
-            'telefone' => $request->input('telefone')
-        ])), 201);
+        return response()->json(new UsuarioCollection($usuarios->paginate($perPage)->appends($request->query())));
     }
 
     /**

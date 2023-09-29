@@ -29,7 +29,7 @@ class UpdateUsuarioRequest extends FormRequest
         if($method == 'PUT'){
             return [
                 'nome' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'email','unique:usuarios'],
+                'email' => ['required', 'email','unique:usuarios,email'],
                 'senha' => ['required', 'string', 'min:6'],
                 'telefone' => ['required', 'string', 'min:10', 'max:12'],
             ];
@@ -38,7 +38,7 @@ class UpdateUsuarioRequest extends FormRequest
         else{
             return [
                 'nome' => ['sometimes','required', 'string', 'max:255'],
-                'email' => ['sometimes','required', 'email','unique:usuarios'],
+                'email' => ['sometimes','required', 'email','unique:usuarios,email'],
                 'senha' => ['sometimes','required', 'string', 'min:6'],
                 'telefone' => ['sometimes','required', 'string', 'min:10', 'max:12'],
             ];
