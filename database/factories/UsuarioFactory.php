@@ -28,7 +28,7 @@ class UsuarioFactory extends Factory
             "nome" => $this->faker->name(),
             "email" => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            "senha" => $this->faker->password(),
+            "senha" => bcrypt($this->faker->password()),
             "telefone" => $this->faker->phoneNumber(),
             'remember_token' => Str::random(10),
         ];

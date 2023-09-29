@@ -6,8 +6,12 @@ up:
 stop: 
 	./vendor/bin/sail stop
 
-# root:
-# 	./vendor/bin/sail root-shell
-
 start-server:
 	php artisan serve
+
+migrate: 
+	php artisan migrate
+
+seed: 
+	php artisan migrate:refresh --seed
+

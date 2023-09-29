@@ -87,7 +87,12 @@ class LojaController extends Controller
     }
 
     public function destroy(Loja $loja)
-    {
+    {   
+        $usuario = auth()->user();
+        if($loja->usuario_id != $usuario->id){
+            return response()->json(['message' => 'Loja não pertece a esse usuário'], 403);
+        }
+
         $loja->delete();
         return response()->json(['message' => 'Loja deletado com sucesso'], 204);
     }
