@@ -228,6 +228,10 @@ http://127.0.0.1:8000/api/v1/lojas?per_page=30
 ```
 
 
+### Acessando rotas - POSTMAN
+
+Para facilitar os testes, subo aqui um workspace publico ao qual utilizei para testar requisições https://app.getpostman.com/join-team?invite_code=6d4e19a923289a5c3ea567944ecc96d8&target_code=05d00f40d1306f8faacca7a4639261be
+
 
 
 
