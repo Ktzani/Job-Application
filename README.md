@@ -121,6 +121,12 @@ Essas são as rotas oferecidas, sendo algumas publicas e outras privadas:
 - As rotas privadas são de criação, atualização, leitura e deleçào das lojas e atualização, leitura e deleção dos usuários. Percebam que a criação do usuário é pública.
 - Um usuário consegue fazer a leitura, atualização e deleção apenas das lojas as quais ele é dono.
 
+**OBSERVAÇÃO**: Caso deseje visualizar todos os usuários e suas respectivas lojas também, basta utiliza a querry na url "includeLojas=true" como a seguir: 
+```
+http://127.0.0.1:8000/api/v1/usuarios?includeLojas=true
+```
+
+
 ### Retornos JSON menores
 Arquivos: app/Resources/V1
 
