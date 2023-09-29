@@ -113,7 +113,7 @@ http://127.0.0.1:8000/api/v1/<rota-desejada>
 Para executar os testes para executar o comando: 
 
 ```
-php artisan test
+make test
 ```
 
 ### Rotas existentes
