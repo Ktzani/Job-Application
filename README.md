@@ -1,66 +1,228 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Iniciando projeto
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/16d45ab8-01c2-4108-b56e-66571e84b064)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+Com o repositorio clonado e aberto, primeiro é necessário baixar todas as dependencias executando: 
+```
+composer install
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Banco de dados - mysql
+O banco a ser utilizado é buildado em um container no docker e, para isso, primeiro é necessário criar o .env file com os seguintes argumentos: 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:6Tu1KyOKKYR9hjP2Hes159C1QgVxKKoB/EYlvsvO1Sg=
+APP_DEBUG=true
+APP_URL=http://localhost
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
 
-## Learning Laravel
+DB_CONNECTION=mysql
+DB_HOST='127.0.0.1'
+DB_PORT=3306
+DB_DATABASE=job_api
+DB_USERNAME=root
+DB_PASSWORD='123'
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+MEMCACHED_HOST=127.0.0.1
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+REDIS_HOST=redis
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
-## Laravel Sponsors
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
 
-### Premium Partners
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+VITE_APP_NAME="${APP_NAME}"
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
-## Contributing
+SCOUT_DRIVER=meilisearch
+MEILISEARCH_HOST=http://meilisearch:7700
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+MEILISEARCH_NO_ANALYTICS=false
+```
 
-## Code of Conduct
+Com o .env file em mãos, basta buildar o container com o seguinte comando: 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+make up
+```
 
-## Security Vulnerabilities
+### Migrations
+Para criação da tabela de usuários e lojas, basta rodar o comando: 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+make migrate
+```
 
-## License
+e caso seja necessário popular o banco a partir da .seed, basta executar o comando:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+make seed
+```
+
+## Servidor 
+Para iniciar o servidor do laravel, basta executar o seguinte comando: 
+
+```
+make start-server
+```
+
+- OBSERVAÇÃO: Para as funcionalidades do projeto, elas foram versionadas em V1 para caso mude algo futuramente. Por isso, todas as rotas se encontram em
+```
+http://127.0.0.1:8000/api/v1/<rota-desejada>
+```
+
+### Rotas existentes
+Para visualizar as rotas do servidor, basta executar o comando: 
+```
+php artisan route:list
+```
+Essas são as rotas oferecidas, sendo algumas publicas e outras privadas:
+
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/7c77aad1-0107-4dfc-8999-e9a4703e0f54)
+
+- As rotas de login e cadastro (create) do usuário são rotas públicas e é por meio delas que ocorre a autenticação do usuário para que assim o mesmo consiga acessar as rotas privadas.
+- As rotas privadas são de criação, atualização, leitura e deleçào das lojas e atualização, leitura e deleção dos usuários. Percebam que a criação do usuário é pública.
+- Um usuário consegue fazer a leitura, atualização e deleção apenas das lojas as quais ele é dono.
+
+### Retornos JSON menores
+Arquivos: app/Resources/V1
+
+Para evitar de retornar todo e qualquer dado das tabelas após uma requisição, adicionou-se resources e collections, que selecionam quais dados dos models devem ser retornados e qual a formatação desses dados.
+
+Exemplos:
+
+- Resource de usuários
+  
+  ![image](https://github.com/Ktzani/Job-Application/assets/89881021/bab3504b-d026-4299-8a94-0f047b08d56d)
+
+- Resource de lojas:
+
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/dc86520e-e131-4568-8d07-79d0594b723e)
+
+
+
+### Validação
+Arquivos: app/Requests/V1
+
+Toda e qualquer validação em rotas (de criação, atualização de lojas e usuários e no login do usuário) é feita dentro do proprio request utilizando o recurso do FormRequest
+
+Exemplos:
+
+- Criação de usuario
+  
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/9282a00c-db93-4ebc-a2e6-64eec7fd069b)
+
+- Criação de loja
+  
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/1a36bf19-4dce-4b91-b56d-c292368153bb)
+
+- Login do usuário
+  
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/1fe8627f-cf62-4f0e-82df-6f263811db6b)
+
+- Atualização do usuário
+
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/765ea599-d3e8-4252-8784-8ed23eaae55d)
+
+- Atualização da loja
+
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/63295b69-2736-4066-8239-d30b484f5db3)
+
+
+### Filtros
+Arquivos: app/Filters/V1
+
+Para filtragem é necessário selecionar o campo e a operação a ser realizada com aquele campo, sendo que alguns campos tem certas operações e outros não, como por exemplo os campos numericos tem operações de >=, <=, >, <. 
+
+- Essas são as operações existentes:
+  
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/8230ec7b-5b84-4d2d-9aaa-1d0282ff84e6)
+
+- Quais campos de usuários podem utilizar quais operações:
+  
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/67cf16ae-7dfe-4421-8357-ad5b5c84500d)
+
+
+- Quais campos de lojas podem utilizar quais operações:
+  
+![image](https://github.com/Ktzani/Job-Application/assets/89881021/b6e62f21-7587-4ac6-b996-d5d9f0ab0ffe)
+
+
+Um exemplo de como se usar esses filtros seria: 
+
+```
+http://127.0.0.1:8000/api/v1/usuarios?nome[like]=%Jac%
+```
+
+ou
+
+```
+http://127.0.0.1:8000/api/v1/usuarios?nome[eq]=Clifton Jacobson I
+```
+
+ou 
+
+```
+http://127.0.0.1:8000/api/v1/lojas?uf[ne]=MG
+```
+ou
+
+```
+http://127.0.0.1:8000/api/v1/lojas?cep[gt]=50000
+```
+ou
+
+```
+http://127.0.0.1:8000/api/v1/lojas?numero[lte]=2000
+```
+
+### Paginação
+Arquivos: Encontra-se dentro dos próprios controllers em app/Http/Controllers/Api/V1/
+
+Para paginação, pode-se escolher a quantidade de itens por pagina seguindo a seguinte url com a query "per_page=integer"
+```
+http://127.0.0.1:8000/api/v1/lojas?per_page=30
+```
+
+
+
+
+
+
