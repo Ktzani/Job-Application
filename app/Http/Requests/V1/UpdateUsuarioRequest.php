@@ -52,3 +52,5 @@ class UpdateUsuarioRequest extends FormRequest
         );
     }
 }
+
+

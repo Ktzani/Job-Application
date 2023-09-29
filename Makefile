@@ -15,3 +15,5 @@ migrate:
 seed: 
 	php artisan migrate:refresh --seed
 
+test: 
+	php artisan test

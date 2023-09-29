@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::get("/teste", function(){
-    return ['ola'];
-})->name("index");
 
 // Public routes
 Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api\V1"], function(){

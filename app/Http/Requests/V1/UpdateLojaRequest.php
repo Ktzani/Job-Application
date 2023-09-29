@@ -63,3 +63,5 @@ class UpdateLojaRequest extends FormRequest
         ]);
     }
 }
+
+
