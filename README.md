@@ -108,6 +108,14 @@ make start-server
 http://127.0.0.1:8000/api/v1/<rota-desejada>
 ```
 
+### Executando Testes
+
+Para executar os testes para executar o comando: 
+
+```
+php artisan test
+```
+
 ### Rotas existentes
 Para visualizar as rotas do servidor, basta executar o comando: 
 ```
@@ -225,14 +233,6 @@ Arquivos: Encontra-se dentro dos próprios controllers em app/Http/Controllers/A
 Para paginação, pode-se escolher a quantidade de itens por pagina seguindo a seguinte url com a query "per_page=integer"
 ```
 http://127.0.0.1:8000/api/v1/lojas?per_page=30
-```
-
-### Executando Testes
-
-Para executar os testes para executar o comando: 
-
-```
-php artisan test
 ```
 
 ### Acessando rotas - POSTMAN
