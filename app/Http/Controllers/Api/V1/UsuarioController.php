@@ -20,7 +20,7 @@ class UsuarioController extends Controller
     {   
         $filter = new UsuariosFilter();
         $filterItems = $filter->transform($request); //[['coluna', 'operador', 'valor']]
-        
+
         $usuarios = Usuario::where($filterItems);
 
         $perPage = $request->input('per_page', 20);
@@ -53,12 +53,16 @@ class UsuarioController extends Controller
      */
     public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
-        return response()->json($usuario->update([
-            'nome' => $request->has('nome') ? $request->input('nome') : $usuario->nome,
-            'email' => $request->has('email') ? $request->input('email') : $usuario->email,
-            'senha' => $request->has('senha') ? bcrypt($request->input('senha')) : $usuario->senha,
-            'telefone' => $request->has('telefone') ? $request->input('telefone') : $usuario->telefone
-        ]));
+        return response()->json([
+            "update" => 
+                $usuario->update([
+                    'nome' => $request->has('nome') ? $request->input('nome') : $usuario->nome,
+                    'email' => $request->has('email') ? $request->input('email') : $usuario->email,
+                    'senha' => $request->has('senha') ? bcrypt($request->input('senha')) : $usuario->senha,
+                    'telefone' => $request->has('telefone') ? $request->input('telefone') : $usuario->telefone
+                ]),
+            'message' => 'Usuário atualizado com sucesso'
+        ]);
     }
 
     /**
@@ -67,6 +71,6 @@ class UsuarioController extends Controller
     public function destroy(Usuario $usuario)
     {
         $usuario->delete();
-        return response()->json("Usuário Deletado", 204);
+        return response()->json(['message' => 'Usuário deletado com sucesso'], 204);
     }
 }

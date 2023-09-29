@@ -68,23 +68,27 @@ class LojaController extends Controller
     public function update(UpdateLojaRequest $request, Loja $loja)
     {
         $usuario = auth()->user();
-        return response()->json($loja->update([
-            'nome' => $request->has('nome') ? $request->input('nome') : $loja->nome,
-            'url' => $request->has('url') ? $request->input('url') : $loja->url,
-            'logo_url' => $request->has('logoUrl') ? $request->input('logo_url') : $loja->logo_url,
-            'endereco' => $request->has('endereco') ? $request->input('endereco') : $loja->endereco,
-            'numero' => $request->has('numero') ? $request->input('numero') : $loja->numero,
-            'bairro' => $request->has('bairro') ? $request->input('bairro') : $loja->bairro,
-            'cidade' => $request->has('cidade') ? $request->input('cidade') : $loja->cidade,
-            'uf' => $request->has('uf') ? $request->input('uf') : $loja->uf,
-            'cep' => $request->has('cep') ? $request->input('cep') : $loja->cep,
-            'usuario_id' => $usuario->id
-        ]));
+        return response()->json([
+            "update" => 
+                $loja->update([
+                    'nome' => $request->has('nome') ? $request->input('nome') : $loja->nome,
+                    'url' => $request->has('url') ? $request->input('url') : $loja->url,
+                    'logo_url' => $request->has('logoUrl') ? $request->input('logo_url') : $loja->logo_url,
+                    'endereco' => $request->has('endereco') ? $request->input('endereco') : $loja->endereco,
+                    'numero' => $request->has('numero') ? $request->input('numero') : $loja->numero,
+                    'bairro' => $request->has('bairro') ? $request->input('bairro') : $loja->bairro,
+                    'cidade' => $request->has('cidade') ? $request->input('cidade') : $loja->cidade,
+                    'uf' => $request->has('uf') ? $request->input('uf') : $loja->uf,
+                    'cep' => $request->has('cep') ? $request->input('cep') : $loja->cep,
+                    'usuario_id' => $usuario->id
+                ]),
+            "message" => 'Loja atualizada com sucesso'
+        ]);
     }
 
     public function destroy(Loja $loja)
     {
         $loja->delete();
-        return response()->json("Loja Deletada", 204);
+        return response()->json(['message' => 'Loja deletado com sucesso'], 204);
     }
 }
