@@ -227,6 +227,13 @@ Para paginação, pode-se escolher a quantidade de itens por pagina seguindo a s
 http://127.0.0.1:8000/api/v1/lojas?per_page=30
 ```
 
+### Executando Testes
+
+Para executar os testes para executar o comando: 
+
+```
+php artisan test
+```
 
 ### Acessando rotas - POSTMAN
 
